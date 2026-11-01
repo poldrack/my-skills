@@ -1,2 +1,5 @@
 # my-skills
-agent skills
+
+Russ Poldrack's agent skills repository
+
+
