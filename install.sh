@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # install symlinks in harness dirs
 
+# start by updating any npx-installed skills
+npx skills@latest update -g
+
 set -euo pipefail
 repo="$(cd "$(dirname "$0")" && pwd)"
 for target in ~/.agents/skills ~/.claude/skills; do
