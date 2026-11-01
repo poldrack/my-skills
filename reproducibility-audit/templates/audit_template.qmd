@@ -1,0 +1,128 @@
+---
+title: "Computational reproducibility audit: AUTHOR et al. (YEAR)"
+subtitle: "“PAPER TITLE.” *JOURNAL* VOL, PAGES. doi:DOI"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show code"
+    embed-resources: true
+    theme: cosmo
+    df-print: kable
+execute:
+  warning: false
+  message: false
+---
+
+::: {.callout-important}
+## AI-generated — not for publication
+The code and prose in this report were written by an AI agent (Claude) under human direction. They have not been verified line by line, and must not be published, circulated, or cited as-is. All claims about the original authors' analyses should be independently checked before being communicated to anyone.
+:::
+
+::: {.callout-warning}
+## Preliminary & unvetted analysis
+This is an internal audit draft. The sensitivity analyses (LIST THEM) are the auditor's choices, not the authors', and their numbers have not been independently validated. Check them before use.
+:::
+
+# Summary
+
+**Scope.** Downloaded data and code from OSF (LINK). Attempted to reproduce STATISTICS and FIGURES; compared the paper against the preregistration (LINK, or "none exists"); assessed the strength of evidence given THREATS.
+
+**Bottom line.**
+
+1. **Computational reproducibility:** EXACT / MINOR DISCREPANCIES / MAJOR. One sentence on what did and didn't reproduce.
+2. **Most consequential error or deviation**, stated so it stands alone.
+3. **Prereg / analytic-flexibility finding.**
+4. **Threat to inference** (attrition, clustering, baseline imbalance...).
+
+**Overall assessment:** reproducible numbers? / strength of evidence for the central claim (strong / moderate / weak / hypothesis-generating), with one-line reason (link to @sec-assessment).
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+library(knitr)
+
+theme_set(theme_minimal(base_size = 12))
+set.seed(1)
+fmt  <- function(x, d = 2) formatC(x, format = "f", digits = d)
+fmtp <- function(p) ifelse(p < .001, "<.001", formatC(p, format = "f", digits = 3))
+
+# Read the POSTED data (path relative to this paper's folder)
+dat <- read.csv("osf/PATH/TO/DATA.csv")
+# Rebuild any variables the scripts expect but the posted file lacks (document each one).
+```
+
+# Materials and provenance
+
+| Item | Source | Status |
+|---|---|---|
+| Paper | `../papers/FILE.pdf` | read in full; SI obtained? |
+| Preregistration | OSF registration `ID`, registered DATE (before/after data collection?) | SHA-256 verified against registration? |
+| Data | `osf/...` (N rows × K cols) + codebook | downloaded |
+| Code | `osf/...` | runs on posted data? reads unposted intermediate files? |
+
+**Data/code gaps relevant to the audit:** (e.g. per-protocol subset only; cluster IDs missing; renamed suffixes; unposted intermediate files; preprocessing needs identifiable raw data).
+
+# Reproduction of reported statistics
+
+<!-- One subsection per results section. For each: a table with columns
+     claim | paper | reproduced, then a bold **Status:** line
+     (exact reproduction / minor discrepancy (say how big & why) / major discrepancy). -->
+
+```{r}
+#| label: repro-main
+# Fit exactly the authors' model (copy their formula/contrasts), then tabulate vs paper.
+```
+
+## Figure N
+
+```{r}
+#| label: figN
+#| fig-cap: "Fig. N regenerated with the authors' plotting code (left) and a corrected/fuller version (right)."
+# Run the authors' plotting code verbatim where possible. Then show what the figure should show
+# (model estimates, all data, cluster-level means). Note anything that changes the picture.
+```
+
+# Deviations from the preregistration
+
+<!-- If no prereg: rename to "Preregistration and analytic flexibility" and tabulate
+     Choice | Used | Alternatives in the data | Consequence. -->
+
+Registration date relative to data collection: ...
+
+| # | Preregistration (with page) | Paper | Disclosed? | Severity |
+|---|---|---|---|---|
+| 1 | | | | Major / Moderate / Minor |
+
+# Threats to inference and robustness
+
+<!-- Pick what applies: differential attrition (chi-square, Lee bounds, selection-model tipping point,
+     low-attrition subsample as benchmark); unit of manipulation / clustering (design effect, leave-one-
+     cluster-out); baseline imbalance and slope-appropriate adjustment; multiplicity within prereg
+     families; unreported outcomes present in the data; specification errors (re-fit corrected model). -->
+
+# Pattern of results across outcomes {#sec-pattern}
+
+<!-- Outcome × finding matrix: rows = all prereg primary/secondary outcomes (+ headline exploratory ones);
+     columns = prereg role, how the paper treats it, effect at each timepoint, effect by subsample,
+     mediation (authors' spec / corrected). Effects in baseline-SD units, sign-aligned so + = benefit.
+     Add an equal-weight composite as an omnibus "did anything happen?" row (label it post hoc). -->
+
+# Assessment of the strength of evidence {#sec-assessment}
+
+**Reproducibility.** ...
+
+**Central claim(s).** One paragraph per headline claim with a rating and bulleted reasons.
+
+**Bottom line.** ...
+
+# Session information
+
+```{r}
+#| label: session
+sessionInfo()
+```
