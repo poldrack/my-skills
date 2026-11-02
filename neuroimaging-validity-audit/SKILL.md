@@ -138,10 +138,15 @@ they were rejected. Never optimize for the number of flaws found.
 ## Output
 
 Deliver the claim ledger, adjudicated findings, checks executed versus proposed,
-revised claim wording, and prioritized next checks. A brief paper-only request
-may use compact tables in chat; a sustained audit should save the report and
-supporting provenance in the user's chosen workspace. Keep original artifacts
-unchanged. Do not force a file format or invoke a full reproduction pipeline.
+revised claim wording, and prioritized next checks. Default to a self-contained
+Quarto HTML report with embedded figures, retaining the `.qmd` source and
+supporting provenance in the user's chosen workspace. Follow the writing,
+rendering, and verification workflow in [report.md](references/report.md) and
+start from [audit_template.qmd](templates/audit_template.qmd). A brief paper-only
+request may use compact tables in chat; honor an explicitly requested alternative
+format. Keep original artifacts unchanged. Reporting does not expand the audit
+budget or require a full reproduction pipeline. Render locally and do not
+publish or upload the report unless explicitly requested.
 
 ### Example of correct disposition
 

@@ -1,0 +1,109 @@
+---
+title: "Neuroimaging validity audit"
+subtitle: "Claim-level assessment of the selected paper or corpus"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show check code"
+    embed-resources: true
+    theme: cosmo
+execute:
+  error: false
+---
+
+::: {.callout-important}
+## AI-generated — not for publication
+This report contains AI-generated analysis and prose. It is a private working
+draft. Verify its claims against the original evidence before external use.
+
+**Human and independent review status:** Not yet recorded; complete before delivery.
+:::
+
+::: {.callout-warning}
+## Preliminary & unvetted analysis
+Audit checks and sensitivity analyses are the auditor's choices unless explicitly
+attributed to the authors. Matching a result from derivatives does not validate
+upstream image processing. Proposed checks are not executed results.
+:::
+
+<!-- Replace instructional comments and fill tables using inspected evidence.
+     For an inapplicable section, explain why. No analysis engine is needed
+     unless executable chunks are added. Read references/report.md before use. -->
+
+# Summary
+
+<!-- Lead with what the selected claims support, what changes, and what remains
+     unresolved. Include strengths and coverage limits; no paper-wide score. -->
+
+| Claim ID | Claim-level assessment | What remains supported | Key limitation or next check |
+|---|---|---|---|
+
+# Scope and evidence
+
+<!-- Identify papers/versions, selection rationale, budget, search scope/date,
+     unavailable evidence, and upstream processing held fixed. -->
+
+| Artifact/version | Source/location | Available versus inspected | Role and limitations |
+|---|---|---|---|
+
+# Claim ledger and mechanisms
+
+| ID | Exact claim and location | Supporting result/location | Measurement and design | Required assumptions | Strongest defensible narrower claim |
+|---|---|---|---|---|---|
+
+| Claim ID | False-positive route | False-null/attenuation route | Evidence that rules each out, or evidence still needed |
+|---|---|---|---|
+
+# Adjudicated findings
+
+<!-- Repeat this record per retained finding, including bounded clean checks:
+     ID/claim ID; status; severity and confidence separately; mechanism/direction;
+     verified quote or labeled paraphrase with source/version/location;
+     calculation inputs/method/output/run record and approximation labels;
+     existing caveats/corrections; strongest counterargument;
+     executed/read-only/proposed check and result/missing evidence;
+     consequence and preserved support; cheapest next check and decision rule.
+     Status: verified error / sensitivity demonstrated / unresolved concern /
+     reporting gap / no issue found in this check. -->
+
+# Checks and figures
+
+| Check ID | Inputs | Executed/read-only/proposed | Result | Limitations/upstream dependencies |
+|---|---|---|---|---|
+
+<!-- Embed available figures here or beside the relevant finding, using relative
+     paths and captions linking claim/check IDs to inputs, units, and uncertainty.
+     Distinguish source figures, derivative checks, sensitivities, and simulations.
+     Example (replace with a real file only when available):
+     ![Check K1: participant estimates.](figures/k1.png){#fig-k1}
+     If no figures are available, state this and why; do not fabricate a plot. -->
+
+## Rejected candidate criticisms
+
+| Candidate/claim ID | Evidence and counterargument | Reason rejected |
+|---|---|---|
+
+# Confidence update and next steps
+
+<!-- Separate justification at publication from present-day confidence. Preserve
+     supported claims and acknowledge existing caveats/corrections. For a corpus,
+     map shared samples/pipelines without treating them as independent evidence. -->
+
+| Claim ID | Revised wording | Priority next check | Decision rule | Cost/artifact needed |
+|---|---|---|---|---|
+
+# Reproducibility and session information
+
+<!-- Record commands, relative input/output paths, versions (including Quarto),
+     seeds where relevant, and run records. Add sessionInfo() for R or equivalent
+     environment information for Python only if that engine was used. -->
+
+# Coverage and verification limits
+
+<!-- Record rendered text/table reconciliation, embedded-resource checks, visual
+     figure inspection, and relocated/offline HTML checks actually performed.
+     End with specific audit limits: e.g. unverified preprocessing, missing
+     derivatives, or uncertain generalization. Update review status above. -->
