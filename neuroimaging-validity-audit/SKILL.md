@@ -107,11 +107,13 @@ confirmations or independent failures.
 
 ## 4. Adjudicate every candidate finding
 
-Use [report.md](references/report.md) for the finding record and deliverable.
 Every candidate needs source evidence, a consequence for a named claim, a strong
 counterargument, and an executed or proposed discriminating check. Verify each
 quote against the source; do not use fabricated page/line numbers. Label
-paraphrases and distinguish supplied excerpts from full-text inspection.
+paraphrases and distinguish supplied excerpts from full-text inspection. Record
+all of this in working notes; the report presents each retained finding in the
+compact record defined in [report.md](references/report.md), with the supporting
+detail in the appendix.
 
 Classify status separately from severity:
 
@@ -143,11 +145,14 @@ they were rejected. Never optimize for the number of flaws found.
 All persistent output should go into a subdirectory within the working directory called "audit-<llm>" where <llm> is replaced by an identifier for the current model (e.g. "audit-fable-5.1"). Deliver the claim ledger, adjudicated findings, checks executed versus proposed,
 revised claim wording, and prioritized next checks. Default to a self-contained
 Quarto HTML report with embedded figures, retaining the `.qmd` source and
-supporting provenance in the user's chosen workspace. Follow the writing,
-rendering, and verification workflow in [report.md](references/report.md) and
-start from [audit_template.qmd](templates/audit_template.qmd). A brief paper-only
-request may use compact tables in chat; honor an explicitly requested alternative
-format. Keep original artifacts unchanged. Reporting does not expand the audit
+supporting provenance in the user's chosen workspace. The report follows the
+contract in [report.md](references/report.md): a verdict-first body of at most
+1500 prose words (bottom line, claims table, findings that change a conclusion,
+minor findings table, checks table, assessment) with the ledgers, check detail,
+rejected criticisms and session information in appendix sections. Start from
+[audit_template.qmd](templates/audit_template.qmd), which has this shape. A brief
+paper-only request may use compact tables in chat; honor an explicitly requested
+alternative format. Keep original artifacts unchanged. Reporting does not expand the audit
 budget or require a full reproduction pipeline. Render locally and do not
 publish or upload the report unless explicitly requested.
 

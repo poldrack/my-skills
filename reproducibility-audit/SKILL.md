@@ -24,6 +24,8 @@ questions:
 3. Given everything, how strong is the evidence for the central claims?
 
 Work through the stages in order. Verify every number you write against rendered output (stage 9).
+The report itself follows the contract in `references/report.md`: a verdict-first body of at
+most 1500 prose words, with ledgers, full robustness output and session details in the appendix.
 
 ## Folder organization (multi-paper by default)
 
@@ -125,7 +127,7 @@ Table: `# | Preregistration (page) | Paper | Disclosed? | Severity (Major/Modera
 - **Copy-paste formula slips** in scripts (a covariate listed twice and another dropped).
 - **Recode bugs** (e.g. `'Woman' -> 'Women'` creating a stray factor level).
 
-Present specification errors as "before / after" code plus a decomposition table (fix A only, fix B only, both), so it's clear which fix does the work. Also show the downstream effect on *every* claim that used the model; corrections are often not one-directional, and saying so matters.
+Present specification errors as "before / after" code plus a decomposition table (fix A only, fix B only, both), so it's clear which fix does the work. Also compute the downstream effect on *every* claim that used the model; corrections are often not one-directional, and saying so matters. The decomposition table and per-claim effects go in the appendix; the finding record in the body carries only the numbers that decide it.
 
 ## Stage 7: Robustness and threats toolkit
 
@@ -140,7 +142,7 @@ Present specification errors as "before / after" code plus a decomposition table
   - count the units per cell;
   - give the design-effect table SE × √(1 + (m − 1)ρ) with df = units − unit-level parameters;
   - compute cell-level ICCs (pre-treatment measures are especially telling);
-  - run **leave-one-cell/cluster-out** refits, and report all rows, not just the damning one.
+  - run **leave-one-cell/cluster-out** refits, and report all rows in the appendix, not just the damning one; the body's robustness table gets one row summarising the result.
 - **Multiplicity** within prereg families (Holm/BH). List *all* nominal hits, including those in the unfavourable direction and those that survive.
 - **Subgroup or branch splits** where the design differs. Treat the three-way interaction as post hoc, and list the confounded differences between branches.
 - **Fragility:** leave-one-participant-out p-value range; ANCOVA on the endpoint as a cross-check.
@@ -156,14 +158,17 @@ For trials with many outcomes, build a matrix:
 - **Composite row:** add an equal-weight composite of the self-report family as an omnibus row, labelled post hoc.
 - **Mediation caveat:** when the *a* path is shared across outcomes, consistent "significant mediation" mostly reflects observational mindset–outcome associations, not treatment effects. Say this explicitly.
 
-Use the matrix to answer the user's likely question: *is this a real effect that was oversold, or something weaker?*
+Use the matrix to answer the user's likely question: *is this a real effect that was oversold, or something weaker?* The matrix goes in the appendix; the answer goes in the bottom line and the claims table.
 
 ## Stage 9: Write, render, and **verify prose against output**
 
-- Start from `templates/audit_template.qmd`. It includes the two required disclaimer callouts:
-  - `callout-important` "AI-generated — not for publication";
-  - `callout-warning` "Preliminary & unvetted analysis".
-- Keep the template's section order: Summary (bottom line first) → Materials & provenance → Reproduction → Prereg deviations → Threats/robustness → Pattern across outcomes → Assessment → Session info.
+- Follow `references/report.md` and start from `templates/audit_template.qmd`. The body is
+  bottom line → claims table → findings that change a conclusion → minor findings table →
+  robustness table → assessment, at most 1500 prose words; materials, prereg table, full
+  reproduction and robustness output, finding detail, clean checks, verification and session
+  info are appendix sections tagged `{.appendix}`.
+- Keep the two disclaimer callouts (`callout-important` "AI-generated — not for publication";
+  `callout-warning` "Preliminary & unvetted analysis").
 - Put computed numbers in inline `r` expressions wherever feasible. Static markdown tables only for the paper's own numbers.
 - Render with `quarto render <file>.qmd` and grep for `Output created`. Expensive bootstraps (2000 draws × several lavaan models) take a few minutes.
 - **After every render, extract the text and check each claim.** Strip tags with a short Python script and read the tables. Drafted prose has repeatedly asserted things the tables contradicted ("only one hit", "dropping any other cell leaves it intact", mislabelled bounds). Also extract the embedded PNGs (base64 in the HTML) and look at them, e.g. to catch empty labels.
@@ -171,7 +176,7 @@ Use the matrix to answer the user's likely question: *is this a real effect that
 
 ## Stage 10: Assessment and follow-up conversation
 
-- Rate each central claim (strong / moderate / weak / hypothesis-generating) with bulleted reasons. Distinguish **computational reproducibility** (often fine) from **inferential strength** (often not).
+- Rate each central claim (strong / moderate / weak / hypothesis-generating) with the one or two reasons that decide it, in the claims table and the assessment. Distinguish **computational reproducibility** (often fine) from **inferential strength** (often not).
 - When asked about errors, separate those **visible from the paper alone** (arithmetic, label swaps) from those **visible only in the code**.
 - If asked whether something warrants a correction: a corrigendum fits errors that change specific stated conclusions without overturning the main results; a retraction is for broader failure. The usual route is to contact the authors first. Have the key models rerun independently before anything leaves the user's hands. Don't draft letters to journals unless asked.
 

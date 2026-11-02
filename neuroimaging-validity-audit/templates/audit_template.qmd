@@ -1,11 +1,11 @@
 ---
-title: "Neuroimaging validity audit"
-subtitle: "Claim-level assessment of the selected paper or corpus"
+title: "Neuroimaging validity audit: AUTHOR et al. (YEAR)"
+subtitle: "“PAPER TITLE.” *JOURNAL* VOL, PAGES. doi:DOI"
 date: today
 format:
   html:
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     code-fold: true
     code-summary: "Show check code"
     embed-resources: true
@@ -16,98 +16,109 @@ execute:
 
 ::: {.callout-important}
 ## AI-generated — not for publication
-This report contains AI-generated analysis and prose. It is a private working
-draft. Verify its claims against the original evidence before external use.
-
-**Human and independent review status:** Not yet recorded; complete before delivery.
+Analysis and prose by MODEL (signature / thinking level if available). Private working draft; verify against the original evidence before external use. **Review status:** no human review; independent rebuttal pass DONE / NOT DONE.
 :::
 
 ::: {.callout-warning}
 ## Preliminary & unvetted analysis
-Audit checks and sensitivity analyses are the auditor's choices unless explicitly
-attributed to the authors. Matching a result from derivatives does not validate
-upstream image processing. Proposed checks are not executed results.
+Checks and sensitivity analyses are the auditor's choices unless attributed to the authors. Matching a result from derivatives does not validate upstream image processing. Proposed checks are not executed results.
 :::
 
-<!-- Replace instructional comments and fill tables using inspected evidence.
-     For an inapplicable section, explain why. No analysis engine is needed
-     unless executable chunks are added. Read references/report.md before use. -->
+<!-- Read references/report.md before use. Delete instructional comments. No analysis engine is
+     needed unless executable chunks are added. -->
 
-# Model identification
+# Bottom line
 
-<!-- identify the specific LLM model what was used to perform the audit, as well as the model signature and thinking level if available-->
+<!-- ≤ 150 words. Sentence 1: the verdict on the central claim(s). Then one sentence each: what
+     remains supported, what changes, what is unresolved. If a correction is warranted, one
+     sentence on what it should address. -->
 
-# Summary
+# Claims
 
-<!-- Lead with what the selected claims support, what changes, and what remains
-     unresolved. Include strengths and coverage limits; no paper-wide score. If a published coorigendum or correction is appropriate, then describe the points that it should address.-->
+| Claim ID | Verdict | Revised wording | Next check |
+|---|---|---|---|
+| C1 | | "…" or Unchanged | |
 
-| Claim ID | Claim-level assessment | What remains supported | Key limitation or next check |
+# Findings that change a conclusion
+
+<!-- Major and moderate findings only, ordered by consequence. One record each. -->
+
+### F1 — HEADLINE STATED AS A CONCLUSION {#f1}
+
+**STATUS · SEVERITY · affects C1.**
+
+*Evidence.* 
+
+*Consequence.* 
+
+*Next check.* 
+
+# Minor findings
+
+| ID | Issue | Location | Fix |
+|---|---|---|---|
+| F? | one sentence | section / table / file | |
+
+# Checks
+
+| Check | Result | Changes the verdict? |
+|---|---|---|
+| K1 | | |
+
+<!-- ≤ 100 words on what the pattern across checks shows. -->
+
+# Assessment
+
+<!-- ≤ 200 words. One bullet per central claim: present-day confidence and the deciding reasons,
+     separating justification at publication from confidence today. One sentence crediting the
+     authors. No numerical scores, no paper-wide verdict. -->
+
+# Scope and materials {.appendix}
+
+<!-- Selection rationale, budget, search scope/date, upstream processing held fixed. -->
+
+| Artifact/version | Source/location | Available vs inspected | Role and limitations |
 |---|---|---|---|
 
-# Scope and evidence
+# Claim ledger and mechanisms {.appendix}
 
-<!-- Identify papers/versions, selection rationale, budget, search scope/date,
-     unavailable evidence, and upstream processing held fixed. -->
-
-| Artifact/version | Source/location | Available versus inspected | Role and limitations |
-|---|---|---|---|
-
-# Claim ledger and mechanisms
-
-| ID | Exact claim and location | Supporting result/location | Measurement and design | Required assumptions | Strongest defensible narrower claim |
-|---|---|---|---|---|---|
-
-| Claim ID | False-positive route | False-null/attenuation route | Evidence that rules each out, or evidence still needed |
-|---|---|---|---|
-
-# Adjudicated findings
-
-<!-- Repeat this record per retained finding, including bounded clean checks:
-     ID/claim ID; status; severity and confidence separately; mechanism/direction;
-     verified quote or labeled paraphrase with source/version/location;
-     calculation inputs/method/output/run record and approximation labels;
-     existing caveats/corrections; strongest counterargument;
-     executed/read-only/proposed check and result/missing evidence;
-     consequence and preserved support; cheapest next check and decision rule.
-     Status: verified error / sensitivity demonstrated / unresolved concern /
-     reporting gap / no issue found in this check. -->
-
-# Checks and figures
-
-| Check ID | Inputs | Executed/read-only/proposed | Result | Limitations/upstream dependencies |
+| ID | Exact claim and location | Supporting result/location | Measurement and design | Required assumptions |
 |---|---|---|---|---|
 
-<!-- Embed available figures here or beside the relevant finding, using relative
-     paths and captions linking claim/check IDs to inputs, units, and uncertainty.
-     Distinguish source figures, derivative checks, sensitivities, and simulations.
-     Example (replace with a real file only when available):
-     ![Check K1: participant estimates.](figures/k1.png){#fig-k1}
-     If no figures are available, state this and why; do not fabricate a plot. -->
+| Claim ID | False-positive route | False-null/attenuation route | Evidence that rules each out, or still needed |
+|---|---|---|---|
 
-## Rejected candidate criticisms
+# Full check ledger {.appendix}
 
-| Candidate/claim ID | Evidence and counterargument | Reason rejected |
+| Check | Inputs | Executed / read-only / proposed | Result | Limitations / upstream dependencies |
+|---|---|---|---|---|
+
+<!-- Figures from executed checks that did not decide a body finding go here, with captions
+     naming check ID, inputs, units and uncertainty. Example:
+     ![Check K1: participant estimates.](figures/k1.png){#fig-k1} -->
+
+# Finding detail {.appendix}
+
+<!-- Numbers, calculations and run records behind minor findings, keyed by ID. -->
+
+# Rejected candidate criticisms {.appendix}
+
+| Candidate / claim ID | Counterargument | Reason rejected |
 |---|---|---|
 
-# Confidence update and next steps
+# Clean checks {.appendix}
 
-<!-- Separate justification at publication from present-day confidence. Preserve
-     supported claims and acknowledge existing caveats/corrections. For a corpus,
-     map shared samples/pipelines without treating them as independent evidence. -->
+<!-- One line per check that found no issue. Bounded support, not certification. -->
 
-| Claim ID | Revised wording | Priority next check | Decision rule | Cost/artifact needed |
-|---|---|---|---|---|
+# Adjudication {.appendix}
 
-# Reproducibility and session information
+<!-- One paragraph: what the independent rebuttal pass was given, what it rejected or weakened. -->
 
-<!-- Record commands, relative input/output paths, versions (including Quarto),
-     seeds where relevant, and run records. Add sessionInfo() for R or equivalent
-     environment information for Python only if that engine was used. -->
+# Verification performed {.appendix}
 
-# Coverage and verification limits
+<!-- Body prose word count; numbers checked against tables; figures inspected; embedded-resource check;
+     specific coverage limits (unverified preprocessing, missing derivatives, generalization). -->
 
-<!-- Record rendered text/table reconciliation, embedded-resource checks, visual
-     figure inspection, and relocated/offline HTML checks actually performed.
-     End with specific audit limits: e.g. unverified preprocessing, missing
-     derivatives, or uncertain generalization. Update review status above. -->
+# Run commands and session info {.appendix}
+
+<!-- Commands, relative paths, versions (incl. Quarto), seeds. sessionInfo() only if R was used. -->

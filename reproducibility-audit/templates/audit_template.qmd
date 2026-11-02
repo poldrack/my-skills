@@ -5,7 +5,7 @@ date: today
 format:
   html:
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     code-fold: true
     code-summary: "Show code"
     embed-resources: true
@@ -18,26 +18,13 @@ execute:
 
 ::: {.callout-important}
 ## AI-generated — not for publication
-The code and prose in this report were written by an AI agent (Claude) under human direction. They have not been verified line by line, and must not be published, circulated, or cited as-is. All claims about the original authors' analyses should be independently checked before being communicated to anyone.
+Code and prose were written by an AI agent (MODEL) under human direction and have not been verified line by line. Do not publish, circulate or cite. Check all claims about the authors' analyses independently before communicating them.
 :::
 
 ::: {.callout-warning}
 ## Preliminary & unvetted analysis
-This is an internal audit draft. The sensitivity analyses (LIST THEM) are the auditor's choices, not the authors', and their numbers have not been independently validated. Check them before use.
+The sensitivity analyses (LIST THEM) are the auditor's choices, not the authors', and their numbers have not been independently validated.
 :::
-
-# Summary
-
-**Scope.** Downloaded data and code from OSF (LINK). Attempted to reproduce STATISTICS and FIGURES; compared the paper against the preregistration (LINK, or "none exists"); assessed the strength of evidence given THREATS.
-
-**Bottom line.**
-
-1. **Computational reproducibility:** EXACT / MINOR DISCREPANCIES / MAJOR. One sentence on what did and didn't reproduce.
-2. **Most consequential error or deviation**, stated so it stands alone.
-3. **Prereg / analytic-flexibility finding.**
-4. **Threat to inference** (attrition, clustering, baseline imbalance...).
-
-**Overall assessment:** reproducible numbers? / strength of evidence for the central claim (strong / moderate / weak / hypothesis-generating), with one-line reason (link to @sec-assessment).
 
 ```{r}
 #| label: setup
@@ -53,74 +40,92 @@ fmtp <- function(p) ifelse(p < .001, "<.001", formatC(p, format = "f", digits = 
 
 # Read the POSTED data (path relative to this paper's folder)
 dat <- read.csv("osf/PATH/TO/DATA.csv")
-# Rebuild any variables the scripts expect but the posted file lacks (document each one).
+# Rebuild any variables the scripts expect but the posted file lacks (document each one in the appendix).
 ```
 
-# Materials and provenance
+# Bottom line
+
+<!-- ≤ 150 words. Sentence 1: the verdict on the central claim(s). Then one sentence each:
+     what reproduces, what changes, what is unresolved. Numbers only where they decide the verdict. -->
+
+# Claims
+
+| Claim | Verdict | What changes | Next check |
+|---|---|---|---|
+| C1 | strong / moderate / weak / hypothesis-generating | | |
+
+# Findings that change a conclusion
+
+<!-- Major and moderate findings only, ordered by consequence. One record each (see references/report.md). -->
+
+### F1 — HEADLINE STATED AS A CONCLUSION {#f1}
+
+**STATUS · SEVERITY · affects C1.**
+
+*Evidence.* 
+
+*Consequence.* 
+
+*Next check.* 
+
+# Minor findings
+
+| ID | Issue | Location | Fix |
+|---|---|---|---|
+| F? | one sentence | section / table / file | |
+
+# Robustness
+
+| Check | Result | Changes the verdict? |
+|---|---|---|
+| Authors' exact specification refit | | No |
+| | | |
+
+<!-- ≤ 100 words on what the pattern across checks shows. Full output in the appendix. -->
+
+# Assessment
+
+<!-- ≤ 200 words. One bullet per central claim: rating and the one or two deciding reasons.
+     One sentence on computational reproducibility; one crediting what the authors did well. -->
+
+# Materials and provenance {.appendix}
 
 | Item | Source | Status |
 |---|---|---|
 | Paper | `../papers/FILE.pdf` | read in full; SI obtained? |
-| Preregistration | OSF registration `ID`, registered DATE (before/after data collection?) | SHA-256 verified against registration? |
+| Preregistration | OSF registration `ID`, registered DATE (before/after data collection?) | SHA-256 verified? |
 | Data | `osf/...` (N rows × K cols) + codebook | downloaded |
-| Code | `osf/...` | runs on posted data? reads unposted intermediate files? |
+| Code | `osf/...` | runs on posted data? reads unposted files? |
 
-**Data/code gaps relevant to the audit:** (e.g. per-protocol subset only; cluster IDs missing; renamed suffixes; unposted intermediate files; preprocessing needs identifiable raw data).
+Data/code gaps and every reconstructed variable: 
 
-# Reproduction of reported statistics
+# Preregistration deviations {.appendix}
 
-<!-- One subsection per results section. For each: a table with columns
-     claim | paper | reproduced, then a bold **Status:** line
-     (exact reproduction / minor discrepancy (say how big & why) / major discrepancy). -->
+<!-- If no prereg: rename "Analytic choices" and tabulate Choice | Used | Alternatives in the data | Consequence. -->
 
-```{r}
-#| label: repro-main
-# Fit exactly the authors' model (copy their formula/contrasts), then tabulate vs paper.
-```
+Registration date relative to data collection: 
 
-## Figure N
-
-```{r}
-#| label: figN
-#| fig-cap: "Fig. N regenerated with the authors' plotting code (left) and a corrected/fuller version (right)."
-# Run the authors' plotting code verbatim where possible. Then show what the figure should show
-# (model estimates, all data, cluster-level means). Note anything that changes the picture.
-```
-
-# Deviations from the preregistration
-
-<!-- If no prereg: rename to "Preregistration and analytic flexibility" and tabulate
-     Choice | Used | Alternatives in the data | Consequence. -->
-
-Registration date relative to data collection: ...
-
-| # | Preregistration (with page) | Paper | Disclosed? | Severity |
+| # | Preregistration (page) | Paper | Disclosed? | Severity |
 |---|---|---|---|---|
-| 1 | | | | Major / Moderate / Minor |
 
-# Threats to inference and robustness
+# Reproduction tables and robustness output {.appendix}
 
-<!-- Pick what applies: differential attrition (chi-square, Lee bounds, selection-model tipping point,
-     low-attrition subsample as benchmark); unit of manipulation / clustering (design effect, leave-one-
-     cluster-out); baseline imbalance and slope-appropriate adjustment; multiplicity within prereg
-     families; unreported outcomes present in the data; specification errors (re-fit corrected model). -->
+<!-- claim | paper | reproduced tables per results section; regenerated figures beside corrected
+     versions; leave-one-out rows; decomposition tables (fix A / fix B / both); outcome × finding matrix. -->
 
-# Pattern of results across outcomes {#sec-pattern}
+# Finding detail {.appendix}
 
-<!-- Outcome × finding matrix: rows = all prereg primary/secondary outcomes (+ headline exploratory ones);
-     columns = prereg role, how the paper treats it, effect at each timepoint, effect by subsample,
-     mediation (authors' spec / corrected). Effects in baseline-SD units, sign-aligned so + = benefit.
-     Add an equal-weight composite as an omnibus "did anything happen?" row (label it post hoc). -->
+<!-- Numbers and code behind minor findings, keyed by ID. -->
 
-# Assessment of the strength of evidence {#sec-assessment}
+# Clean checks {.appendix}
 
-**Reproducibility.** ...
+<!-- One line per check that found no problem. -->
 
-**Central claim(s).** One paragraph per headline claim with a rating and bulleted reasons.
+# Verification performed {.appendix}
 
-**Bottom line.** ...
+<!-- Body prose word count; which numbers were checked against rendered tables; figures inspected. -->
 
-# Session information
+# Run commands and session info {.appendix}
 
 ```{r}
 #| label: session

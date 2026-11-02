@@ -1,108 +1,110 @@
-# Audit report structure
+# Report contract
 
-Adapt length to scope; retain the distinctions below even in a compact report.
+The report is written for a scientist who reads the first screen, decides whether the
+paper's claims hold, and only then looks at detail. Everything that decides a verdict goes
+in the main body. Everything that documents how the verdict was reached goes in the
+appendix. Start from `templates/audit_template.qmd`, which already has this shape. The
+template needs no R or Python kernel for a document-only audit; add executable chunks only
+for checks actually run.
 
-## Write, render, and verify the HTML report
+## Shape
 
-Start from [audit_template.qmd](../templates/audit_template.qmd). Transfer the
-reporting methods from reproducibility audits without implying that a validity
-audit reproduced raw-image processing. The template needs no R or Python kernel
-for a document-only audit; add executable chunks only for checks actually run.
+Main body, in this order. Budgets count prose words only: not YAML, code, tables,
+captions, headings, status lines, or appendix.
 
-Save `audit.qmd`, `audit.html`, `figures/`, and check outputs/run records in a
-paper-specific folder in the user's workspace. For a corpus, use unique paper
-IDs (e.g. author-year-short-title) and a corpus summary that identifies shared
-dependencies. Use relative paths within each report folder. Preserve original
-artifacts and retain figure files alongside the source for later rerendering.
+1. **The two callouts** (AI-generated; preliminary), at most 60 words each. The first names
+   the model used (and signature or thinking level if available) and states the human and
+   independent review status. They carry the AI and preliminary caveats for the whole
+   report; the body does not repeat them.
+2. **Bottom line** (at most 150 words). The first sentence states the verdict on the central
+   claim(s). Then one sentence each: what remains supported, what changes, what is
+   unresolved. If a correction or corrigendum is warranted, one sentence names what it
+   should address.
+3. **Claims table.** One row per central claim: `Claim ID | Verdict | Revised wording | Next
+   check`. This is the only place revised claim wording appears; claims that survive
+   unchanged say so.
+4. **Findings that change a conclusion.** Only findings of major or moderate severity,
+   ordered by consequence. Each uses the finding record below, at most 150 words of prose
+   (heading and status line excluded); tables and figures are extra. A record that needs
+   more than three *Evidence* sentences moves its extra numbers to a table beside it or to
+   *Finding detail* in the appendix.
+5. **Minor findings.** One table: `ID | Issue | Location | Fix`. The Issue cell is one
+   sentence; supporting numbers go to *Finding detail* in the appendix.
+6. **Checks.** One summary table: `Check | Result | Changes the verdict?`, then at most one
+   paragraph (about 100 words) on what the pattern across checks shows. Proposed checks
+   say "proposed" in the Result cell.
+7. **Assessment** (at most 200 words). One bullet per central claim: present-day confidence
+   and the one or two reasons that decide it, separating justification at publication
+   from confidence today. Then one sentence crediting what the authors did well. No
+   numerical confidence scores and no paper-wide verdict.
 
-1. Lead with a claim-level summary: what remains supported, what changes, and
-   what is unresolved. Retain the two callouts identifying AI-generated content
-   and preliminary analysis; accurately state human/independent review status.
-2. Populate the sections below. Generate computed tables and prose numbers from
-   the same saved results or inline expressions in the chosen execution engine.
-   Distinguish paper-reported values from recomputations and approximate checks.
-   Proposed checks have no computed result; missing evidence is not a clean pass.
-3. Embed relevant figures from executed checks and source figures needed to
-   substantiate findings. Use Markdown images with relative paths, captions,
-   alt text, and unique figure IDs, or executable plotting chunks. For example:
+Appendix: headings tagged `{.appendix}`, which Quarto places after the body. Sections, in
+order: scope and materials (artifacts, versions, inspected vs available, upstream
+processing held fixed); claim ledger and mechanism table (the two tables from SKILL.md);
+full check ledger (`Check | Inputs | Executed/read-only/proposed | Result | Limitations`);
+finding detail; rejected candidate criticisms (`Candidate | Counterargument | Reason
+rejected`); clean checks; adjudication (one paragraph on the rebuttal pass and what it
+changed); verification performed; run commands and session info. Tables and code, minimal
+prose.
 
-   ```markdown
-   ![Participant estimates for check K1.](figures/participant-estimates.png){#fig-k1}
-   ```
+Main body target: at most 1500 prose words. When the body runs long, move material to the
+appendix instead of compressing sentences.
 
-   Each caption identifies the claim/check, input/version, units, uncertainty,
-   and what the plot establishes. Label source reproductions, new derivative
-   plots, sensitivity analyses, and illustrative simulations distinctly. Show
-   original and alternative specifications together when informative; report
-   all attempted specifications. For brain maps, include orientation, space,
-   threshold, and color scale. Do not invent images or compute new analyses
-   merely to fill a figure slot. State when no usable figures are available.
-4. Keep `format.html.embed-resources: true`, the table of contents, and folded
-   code. From the report folder, render with `uv run quarto render audit.qmd`.
-   Check the exit status, `Output created` message, and actual HTML file. Record
-   Quarto and analysis-tool versions, inputs, seeds where relevant, and commands.
-   If Quarto or an execution dependency is unavailable, deliver the source and
-   existing figures with the exact blocker; do not claim an HTML was rendered.
-5. After every render, extract/read the HTML text and compare every numerical
-   statement, status, and caption against displayed tables and saved outputs.
-   Check evidence supporting claims as carefully as evidence against them.
-   Inspect the rendered figures (or decode embedded base64 PNGs and view them)
-   for empty panels, clipped labels, incorrect scales, and mismatched captions.
-   Verify image resources are embedded as data URIs or inline SVG, with no local
-   file or remote display dependencies. Open a copy of the HTML outside its
-   report folder to confirm it works without the figure directory; inspect it
-   offline when possible. Ordinary provenance hyperlinks may remain external.
-6. Deliver links or attachments to the local HTML and `.qmd` source. Keep the
-   report private; publication/upload requires an explicit user request. If
-   visual inspection was unavailable, state that remaining verification limit.
+## Finding record
 
-The sections below define the content contract used by the template.
+```
+### F3 — Pooled-vs-multigroup comparison is not a valid nested test {#f3}
 
-## Scope and evidence
+**Verified error · moderate · affects C2.**
 
-Identify papers/versions, selected claims, available versus inspected artifacts,
-budget, search scope/date when applicable, and unavailable evidence. Explain
-selection of papers/claims. State which upstream processing is held fixed.
+*Evidence.* Two or three sentences. Numbers that decide the finding go here or in an
+adjacent table; the rest go to the appendix. The whole record is at most 150 words of prose. Executed checks state their result; proposed
+checks say "proposed". Source locations (section, table, file) go in parentheses at the
+end of the sentence they support; quotes are verified against the source.
 
-## Claim ledger and mechanism table
+*Consequence.* One or two sentences: what changes in the conclusion, what remains supported.
 
-Use the two tables in SKILL.md. Include a defensible revised claim for each
-central claim, including claims that survive unchanged.
+*Next check.* One sentence with its decision rule, or "None needed."
+```
 
-## Findings
+- **Status** is one of: verified error · sensitivity demonstrated · unresolved concern ·
+  reporting gap. **Severity** (major / moderate / minor) is the effect on the named claim;
+  confidence, when it differs from what the status implies, is one word after the severity.
+- The mechanism and direction (false positive, false null, interpretation overreach) is
+  stated in the first *Evidence* sentence when it is not obvious from the heading.
+- An adopted counterargument is one sentence inside *Evidence*; rejected ones go to the
+  appendix table.
+- A code chunk whose output the record quotes inline sits directly under the status line,
+  folded. Other chunks go to the appendix.
+- A figure that decides a finding sits after its record with a caption of at most 40 words
+  saying what it shows and what it establishes. Brain maps also state space, threshold and
+  orientation. Inputs, versions and seeds go to the appendix check ledger. No figure is
+  invented to fill a slot.
+- A check that found no issue is a row under *Clean checks* in the appendix, not a record.
 
-For every retained finding record:
+## Sentences
 
-- ID and affected claim ID.
-- Status: verified error / sensitivity demonstrated / unresolved concern /
-  reporting gap / no issue found in this check.
-- Severity and confidence, separately; no severity required for a clean check.
-- Mechanism and direction: false positive, false null, either, or interpretation
-  overreach with the relevant direction explained.
-- Evidence: verified quote or labeled paraphrase, exact source location, and
-  relevant artifact/version. For calculations, inputs, method, output, and run
-  record. Mark approximate calculations.
-- Existing caveat/correction and strongest counterargument.
-- Check status: executed / read-only / proposed; result or missing evidence.
-- Consequence: what changes in the conclusion, and what remains supported.
-- Cheapest discriminating next check and its decision rule.
+- Every section and finding opens with its conclusion.
+- A number appears in prose only when it decides a verdict; otherwise it lives in a table.
+- Name a file, function or script only when the reader must open it; otherwise say what it does.
+- Each caveat is stated once, where it applies.
+- Describe results, not the process of getting them. Sentences such as "The chunk below
+  refits…" or "The audit then…" are left out.
+- Paper-reported values, recomputations and approximate checks are labelled as such where
+  they appear.
 
-## Check ledger
+## Render and verify
 
-| Check | Inputs | Executed/read-only/proposed | Result | Limitations/upstream dependencies |
-|---|---|---|---|---|
-
-List rejected candidate criticisms with concise reasons. Distinguish inability
-to check from passing. Summarize supported claims as well as weaknesses.
-
-## Confidence update and next steps
-
-Separate original justification from present-day confidence. For a corpus,
-describe shared dependencies without treating repeated findings as independent.
-Rank unresolved checks by likely consequence and cost; explain why a costly
-rerun would be worth doing before proposing it. Avoid unsupported numerical
-confidence scores or binary paper-wide verdicts.
-
-End with specific coverage limits, such as unverified preprocessing or uncertain
-sampling generalization, rather than a generic disclaimer. Identify the report
-as AI-assisted and state which findings received human or independent review.
+- Save `audit.qmd`, `audit.html`, `figures/` and check outputs in the paper's report
+  folder, with relative paths, so the folder can be moved. For a corpus, one folder per
+  paper plus a corpus summary that names shared dependencies.
+- Keep `embed-resources: true`, the table of contents and folded code. Render with
+  `uv run quarto render audit.qmd`; confirm the exit status and `Output created`. If
+  Quarto or a dependency is missing, deliver the source and figures with the exact blocker.
+- Extract the rendered text and check every number, status and caption in the body
+  against the tables it summarises. Check evidence for claims as carefully as evidence
+  against them.
+- Open the embedded figures (decode the base64 PNGs if needed) and check for empty panels,
+  clipped labels and caption mismatches. Confirm images are embedded, not linked.
+- Report the body word count (prose only) and what was checked in *Verification performed*.
+- Keep the report private; publication or upload requires an explicit user request.
