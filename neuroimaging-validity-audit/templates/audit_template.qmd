@@ -33,10 +33,14 @@ upstream image processing. Proposed checks are not executed results.
      For an inapplicable section, explain why. No analysis engine is needed
      unless executable chunks are added. Read references/report.md before use. -->
 
+# Model identification
+
+<!-- identify the specific LLM model what was used to perform the audit, as well as the model signature and thinking level if available-->
+
 # Summary
 
 <!-- Lead with what the selected claims support, what changes, and what remains
-     unresolved. Include strengths and coverage limits; no paper-wide score. -->
+     unresolved. Include strengths and coverage limits; no paper-wide score. If a published coorigendum or correction is appropriate, then describe the points that it should address.-->
 
 | Claim ID | Claim-level assessment | What remains supported | Key limitation or next check |
 |---|---|---|---|
