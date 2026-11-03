@@ -1,4 +1,0 @@
-interface:
-  display_name: "Neuroimaging Validity Audit"
-  short_description: "Audit published claims with low-cost validity checks"
-  default_prompt: "Use $neuroimaging-validity-audit to audit the central claims of this paper, starting with documents and available derivatives."
